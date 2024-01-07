@@ -15,7 +15,7 @@ fs.readFile('steam_reviews.html', 'utf8', (err, htmlContent) => {
     const document = dom.window.document;
 
     const reviews = document.querySelectorAll('.apphub_Card');
-    let csvContent = 'Recommandé,Utile,Amusant,Heures,Date,Commentaire,Produits Enregistrés,Accès Anticipé,Remboursé,Reçu Gratuitement\n';
+    let csvContent = 'Recommande;Utile;Amusant;Heures;Date;Commentaire;NombreProduitEnregistres;AccesAnticipe;Rembourse;RecuGratuitement;Rewards\n';
 
     reviews.forEach(review => {
         const recommended = review.querySelector('.title').textContent.includes('Recommandé') ? '1' : '0';
@@ -23,7 +23,7 @@ fs.readFile('steam_reviews.html', 'utf8', (err, htmlContent) => {
         const foundHelpful = review.querySelector('.found_helpful');
         let hours = review.querySelector('.hours').textContent.trim().replace('h en tout', '').trim();
         hours = hours.replace('.', ',');
-        
+
         let datePosted = review.querySelector('.date_posted').textContent.trim().replace('Évaluation publiée le', '').trim();
 
         // Vérifier si une année est présente dans la date
@@ -49,7 +49,6 @@ fs.readFile('steam_reviews.html', 'utf8', (err, htmlContent) => {
         const refunded = review.querySelector('.refunded') ? '1' : '0';
         const receivedCompensation = review.querySelector('.received_compensation') ? '1' : '0';
 
-
         let helpful = '0';
         let funny = '0';
 
@@ -74,7 +73,11 @@ fs.readFile('steam_reviews.html', 'utf8', (err, htmlContent) => {
             }
         }
 
-        csvContent += `"${recommended}";"${helpful}";"${funny}";"${hours.replace('h en tout', '').trim()}";"${datePosted.replace('Évaluation publiée le', '').trim()}";"${comment.replace(/(\r\n|\n|\r)/gm, " ").replace(/"/g, '""')}";"${productsRegistered.replace(/(\r\n|\n|\r)/gm, " ").replace(/"/g, '""')}";"${earlyAccessReview}";"${refunded}";"${receivedCompensation}"\n`;
+        const rewardsElement = review.querySelector('.review_award_aggregated');
+        const rewards = rewardsElement ? rewardsElement.textContent.trim() : '0';
+
+
+        csvContent += `"${recommended}";"${helpful}";"${funny}";"${hours.replace('h en tout', '').trim()}";"${datePosted.replace('Évaluation publiée le', '').trim()}";"${comment.replace(/(\r\n|\n|\r)/gm, " ").replace(/"/g, '""')}";"${productsRegistered.replace(/(\r\n|\n|\r)/gm, " ").replace(/"/g, '""')}";"${earlyAccessReview}";"${refunded}";"${receivedCompensation}";"${rewards}"\n`;
     });
 
     // Écrire le résultat dans un fichier CSV
