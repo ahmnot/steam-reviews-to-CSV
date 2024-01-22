@@ -1,4 +1,4 @@
-A extractor of data from review pages like these: <br> https://steamcommunity.com/app/439550/reviews/?browsefilter=mostrecent&snr=1_5_100010_&p=1&filterLanguage=all  <br>, which outputs the reviews to a nice CSV file. <br>
+A data extractor from these review pages: <br> https://steamcommunity.com/app/439550/reviews/?browsefilter=mostrecent&snr=1_5_100010_&p=1&filterLanguage=all  <br>, which outputs the reviews to a nice CSV file. <br>
 
 In order to make it work, you have to follow these steps: <br>
 1 - Go to the inspector of the navigator on the previously said page. <br>
