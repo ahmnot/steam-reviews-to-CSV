@@ -1,6 +1,6 @@
 A data extractor from these review pages: <br> https://steamcommunity.com/app/439550/reviews/?browsefilter=mostrecent&snr=1_5_100010_&p=1&filterLanguage=all  <br>, which outputs the reviews to a nice CSV file. <br>
 
-In order to make it work, you have to follow these steps: <br>
+In order to make it work, follow these steps: <br>
  <br>
 1 - Go to the inspector of the navigator on the previously said page. <br>
 2 - Copy the content within the div which has the id="AppHubCards" inside an .html file. <br>
